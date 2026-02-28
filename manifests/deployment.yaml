@@ -1,23 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
 spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      # 1. Сначала запускается этот контейнер, чтобы подготовить файл
+      initContainers:
+      - name: install
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          # Копируем шаблон из ConfigMap в общую папку и заменяем имя пода
+          cp /tmp/proto/index.html /workdir/index.html
+          sed -i "s/POD_NAME_HERE/$HOSTNAME/g" /workdir/index.html
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - name: html-proto
+          mountPath: /tmp/proto
+        - name: workdir
+          mountPath: /workdir
+
+      # 2. Основной Nginx, который просто показывает готовый файл
       containers:
       - name: nginx
         image: nginx:1.21.6
         ports:
         - containerPort: 80
-        command: ["/bin/sh", "-c"]
-        args:
-          # Копируем из Read-Only папки в рабочую, правим и запускаем
-          - cp /tmp/proto/index.html /usr/share/nginx/html/index.html && sed -i "s/POD_NAME_HERE/$HOSTNAME/g" /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
         volumeMounts:
-        - name: html-proto        # Источник (ConfigMap)
-          mountPath: /tmp/proto
-        - name: html-writable     # Куда можно писать
+        - name: workdir
           mountPath: /usr/share/nginx/html
+      
       volumes:
       - name: html-proto
         configMap:
           name: nginx-index-html
-      - name: html-writable       # Временная папка в памяти
+      - name: workdir
         emptyDir: {}
 ---
 apiVersion: v1
