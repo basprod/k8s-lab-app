@@ -13,13 +13,14 @@ data:
             body { background-color: #1a1a2e; color: #e94560; font-family: sans-serif; text-align: center; padding-top: 50px; }
             .container { border: 2px solid #e94560; display: inline-block; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px #e94560; }
             h1 { font-size: 3em; }
-            b { color: #00d2ff; }
+            .pod-name { color: #00d2ff; font-weight: bold; font-family: monospace; background: #16213e; padding: 5px 10px; border-radius: 5px; }
         </style>
     </head>
     <body>
         <div class="container">
             <h1>🚀 Кластер K8s запущен!</h1>
-            <p>Этот контент прилетел из <b>ConfigMap</b> через <b>ArgoCD</b></p>
+            <p>Контент из <b>ConfigMap</b> через <b>ArgoCD</b></p>
+            <p>Я работаю на поде: <span class="pod-name">POD_NAME_HERE</span></p>
             <hr>
             <p>Узлы: Master (300G) + 2 Workers (500G)</p>
         </div>
