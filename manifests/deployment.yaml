@@ -17,13 +17,13 @@ spec:
         image: nginx:1.21.6
         ports:
         - containerPort: 80
-        volumeMounts:           # Куда вставить файл
+        volumeMounts:
         - name: html-volume
-          mountPath: /usr/share/nginx/html
-      volumes:                  # Откуда взять файл
+          mountPath: /usr/share/nginx/html  # Стандартная папка Nginx
+      volumes:
       - name: html-volume
         configMap:
-          name: nginx-index-html
+          name: nginx-index-html            # Имя нашего ConfigMap
 ---
 apiVersion: v1
 kind: Service
