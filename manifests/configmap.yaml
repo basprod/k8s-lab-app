@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-index-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>K8s GitOps Lab</title>
+    <style>
+        body { background-color: #1a1a2e; color: #e94560; font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .container { border: 2px solid #e94560; display: inline-block; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px #e94560; }
+        h1 { font-size: 3em; }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🚀 K8s Cluster is LIVE!</h1>
+            <p>Welcome to the GitOps Lab</p>
+            <p>Managed by <b>ArgoCD</b></p>
+            <hr>
+            <p>Nodes: Master (300G) + 2 Workers (500G)</p>
+        </div>
+    </body>
+    </html>
