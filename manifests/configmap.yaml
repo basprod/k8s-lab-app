@@ -7,20 +7,21 @@ data:
     <!DOCTYPE html>
     <html>
     <head>
-    <title>K8s GitOps Lab</title>
-    <style>
-        body { background-color: #1a1a2e; color: #e94560; font-family: sans-serif; text-align: center; padding-top: 50px; }
-        .container { border: 2px solid #e94560; display: inline-block; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px #e94560; }
-        h1 { font-size: 3em; }
-    </style>
+        <meta charset="utf-8">
+        <title>K8s GitOps Lab</title>
+        <style>
+            body { background-color: #1a1a2e; color: #e94560; font-family: sans-serif; text-align: center; padding-top: 50px; }
+            .container { border: 2px solid #e94560; display: inline-block; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px #e94560; }
+            h1 { font-size: 3em; }
+            b { color: #00d2ff; }
+        </style>
     </head>
     <body>
         <div class="container">
-            <h1>🚀 K8s Cluster is LIVE!</h1>
-            <p>Welcome to the GitOps Lab</p>
-            <p>Managed by <b>ArgoCD</b></p>
+            <h1>🚀 Кластер K8s запущен!</h1>
+            <p>Этот контент прилетел из <b>ConfigMap</b> через <b>ArgoCD</b></p>
             <hr>
-            <p>Nodes: Master (300G) + 2 Workers (500G)</p>
+            <p>Узлы: Master (300G) + 2 Workers (500G)</p>
         </div>
     </body>
     </html>
